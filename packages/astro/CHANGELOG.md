@@ -1,5 +1,72 @@
 # astro
 
+## 4.10.2
+
+### Patch Changes
+
+- [#11189](https://github.com/withastro/astro/pull/11189) [`75a8fe7`](https://github.com/withastro/astro/commit/75a8fe7e72b95f20c36f034de2b51b6a9550e27e) Thanks [@ematipico](https://github.com/ematipico)! - Improve error message when using `getLocaleByPath` on path that doesn't contain any locales.
+
+- [#11195](https://github.com/withastro/astro/pull/11195) [`0a6ab6f`](https://github.com/withastro/astro/commit/0a6ab6f562651b558ca90761feed5c07f54f2633) Thanks [@florian-lefebvre](https://github.com/florian-lefebvre)! - Adds support for enums to `astro:env`
+
+  You can now call `envField.enum`:
+
+  ```js
+  import { defineConfig, envField } from 'astro/config';
+
+  export default defineConfig({
+    experimental: {
+      env: {
+        schema: {
+          API_VERSION: envField.enum({
+            context: 'server',
+            access: 'secret',
+            values: ['v1', 'v2'],
+          }),
+        },
+      },
+    },
+  });
+  ```
+
+- [#11195](https://github.com/withastro/astro/pull/11195) [`0a6ab6f`](https://github.com/withastro/astro/commit/0a6ab6f562651b558ca90761feed5c07f54f2633) Thanks [@florian-lefebvre](https://github.com/florian-lefebvre)! - Adds additional validation options to `astro:env`
+
+  `astro:env` schema datatypes `string` and `number` now have new optional validation rules:
+
+  ```js
+  import { defineConfig, envField } from 'astro/config';
+
+  export default defineConfig({
+    experimental: {
+      env: {
+        schema: {
+          FOO: envField.string({
+            // ...
+            max: 32,
+            min: 3,
+            length: 12,
+            url: true,
+            includes: 'foo',
+            startsWith: 'bar',
+            endsWith: 'baz',
+          }),
+          BAR: envField.number({
+            // ...
+            gt: 2,
+            min: 3,
+            lt: 10,
+            max: 9,
+            int: true,
+          }),
+        },
+      },
+    },
+  });
+  ```
+
+- [#11211](https://github.com/withastro/astro/pull/11211) [`97724da`](https://github.com/withastro/astro/commit/97724da93ed7b1db19632c0cdb4b3aab1ff84812) Thanks [@matthewp](https://github.com/matthewp)! - Let middleware handle the original request URL
+
+- [#10607](https://github.com/withastro/astro/pull/10607) [`7327c6a`](https://github.com/withastro/astro/commit/7327c6acb197e1f2ea6cf94cfbc5700bc755f982) Thanks [@frankbits](https://github.com/frankbits)! - Fixes an issue where a leading slash created incorrect conflict resolution between pages generated from static routes and catch-all dynamic routes
+
 ## 4.10.1
 
 ### Patch Changes
